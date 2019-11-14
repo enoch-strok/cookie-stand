@@ -29,20 +29,26 @@ var SeatleShop = {
         for (var i = 0; i < hours.length; i++) {
             var random = randomNumber(this.minCustomerEachHour,this.maxCustomerEachHour);
             this.customersEachHour.push(random);
-            var cookieEachHourMath = random * this.averageCookiesPerCustomer;
+            var cookieEachHourMath = Math.floor(random * this.averageCookiesPerCustomer);
             this.cookiesEachHour.push(cookieEachHourMath);
             this.totalCookieForTheDay += cookieEachHourMath;
         }
     },
 
-    
+
     render: function () {
+        this.hourlySales();
         for (var i = 0; i < hours.length; i++) {
             var liEl = document.createElement('li');
-            liEl.textContent = hours[i];
+            liEl.textContent = `${hours[i]}: ${this.cookiesEachHour[i]} cookies`;
             firstAndPikeElement.appendChild(liEl);
         };
+
+        var liEl = document.createElement('li');
+        liEl.textContent = `Total: ${this.totalCookieForTheDay} cookies`;
+        firstAndPikeElement.appendChild(liEl);
     },
+
 
 
 };
