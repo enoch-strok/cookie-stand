@@ -17,6 +17,8 @@ var randomNumber = function(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 };
 
+
+
 var SeatleShop = {
     minCustomerEachHour: 23,
     maxCustomerEachHour: 65,
@@ -31,7 +33,7 @@ var SeatleShop = {
             this.customersEachHour.push(random);
             var cookieEachHourMath = Math.floor(random * this.averageCookiesPerCustomer);
             this.cookiesEachHour.push(cookieEachHourMath);
-            this.totalCookieForTheDay += cookieEachHourMath;
+            this.totalCookieForTheDay = this.totalCookieForTheDay + cookieEachHourMath;
         }
     },
 
