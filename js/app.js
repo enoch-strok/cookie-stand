@@ -1,9 +1,16 @@
 'use strict';
 
-//array to show store hours
+//[Done] array to show store hours
+CookieShop.hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
-//array to store all new cookie shops
+//[Done] array to store all new cookie shops
 CookieShop.allStores = [];
+
+//[Done] A counter to tally all of the stores total
+CookieShop.allStoresTotal = 0;
+
+//[] Use document.getElement to store the table's id
+CookieShop.tableDataEl = document.getElementById('tableData');
 
 // var firstAndPikeElement = document.getElementById('firstAndPike');
 
@@ -16,33 +23,107 @@ CookieShop.allStores = [];
 //append to the DOM
 // firstAndPikeElement.appendChild(liEl);
 
-//Costructor - Using the Object 'SeattleShop' as a template to create a constructor for all future shops. 
+//[Done] Costructor - Using the Object 'SeattleShop' as a template to create a constructor for all future shops.
 
 function CookieShop(Loc, MinCust, MaxCust, AvgCookies) {
     this.Location = Loc;
     this.MinimumCustomer = MinCust;
     this.MaximumCustomersPerHour = MaxCust;
     this.AverageCookiesPerHour = AvgCookies;
-    this.customersPerHour = [];
+    this.hourlyCookiesTotal = [];
     this.dailyCookies = 0;
     CookieShop.allStores.push(this);
     //generate cookies upon instantiation
-    // this.generateHourlyCookies();
+    this.generateHourlyCookies();
     //generate shop row upon instantiation
-    // this.renderShopRow();
-    
-}
+    this.renderShopRow();
+};
+
+var randomCustomer = function (min, max) {
+    return Math.ceil(Math.random() * (max - min) + min);
+};
+
+CookieShop.prototype.generateHourlyCookies = function () {
+    for (var i = 0; i < CookieShop.hours.length; i++) {
+        var cookie = Math.ceil(this.AverageCookiesPerHour * randomCustomer(this.MinimumCustomer, this.MaximumCustomersPerHour));
+        this.hourlyCookiesTotal.push(cookie);
+        this.dailyCookies += cookie;
+        CookieShop.allStoresTotal += cookie;
+    }
+};
+
+// Function to render Header Row
+
+var renderHeaderRow = function () {
+    //create elements
+    var trEl = document.createElement('tr');
+    var thEl = document.createElement('th');
+    //give the element content
+    thEl.textContent = 'Location';
+    //append element to the DOM
+    trEl.appendChild(thEl);
+
+    for (var i = 0; i < CookieShop.hours.length; i++) {
+        var tdEl = document.createElement('th');
+        tdEl.textContent = CookieShop.hours[i];
+        trEl.appendChild(tdEl);
+    };
+    var tdElem = document.createElement('th');
+    tdElem.textContent = 'Total';
+    trEl.appendChild(tdElem);
+    CookieShop.tableDataEl.appendChild(trEl);
+};
+
+
+
+// CookieShop.tableDataEl.appendChild(trEl);
+
+renderHeaderRow();
+
+// Function to render Shop Row
+
+CookieShop.prototype.renderShopRow = function() {
+    var trEl = document.createElement('tr');
+    var tdEl = document.createElement('th');
+    tdEl.textContent = this.Location;
+    trEl.appendChild(tdEl);
+
+    for(var i = 0; i < this.hourlyCookiesTotal.length; i++) {
+        tdEl = document.createElement('td');
+        tdEl.textContent = this.hourlyCookiesTotal[i];
+        trEl.appendChild(tdEl);
+    }
+    var tdElem = document.createElement('th');
+    tdElem.textContent = this.dailyCookies;
+    trEl.appendChild(tdElem);
+    CookieShop.tableDataEl.appendChild(trEl);
+};
+
+// Function to render footer with totals
+
+// render: CookieShop.prototype.generateHourlyCookies();
+// for (var i = 0; i < hours.length; i++) {
+//     var liEl = document.createElement('li');
+//     liEl.textContent = `${hours[i]}: ${this.hourlyCookiesTotal[i]} cookies`;
+//     firstAndPikeElement.appendChild(liEl);
+// };
+
+// var liEl = document.createElement('li');
+// liEl.textContent = `Total: ${this.dailyCookies} cookies`;
+// firstAndPikeElement.appendChild(liEl);
+
+
 
 new CookieShop('Seattle', 23, 65, 6.3);
-
-
-
+new CookieShop('Tokyo', 3, 24, 1.2);
+new CookieShop('Dubai', 11, 38, 3.7);
+new CookieShop('Paris', 20, 38, 3.7);
+new CookieShop('Lima', 2, 16, 4.6);
 
 
 
 //Object - For Seattle Only. Need to do this for all the other locations in a form of a constructor.
 
-// var hours = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm']
 
 // var randomNumber = function(min, max) {
 //     return Math.floor(Math.random() * (max - min) + min);
