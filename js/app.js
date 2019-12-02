@@ -195,3 +195,12 @@ renderFooterRow();
 
 
 // SeattleShop.render();
+
+
+// var userForm = document.getElementById('user-form');
+// userForm.addEventListener('Submit', handleSubmit);
+
+// function handleSubmit(event) {
+//     console.log('proof of life!')
+// };
+
