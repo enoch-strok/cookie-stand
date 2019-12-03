@@ -133,6 +133,34 @@ new CookieShop('Lima', 2, 16, 4.6);
 renderFooterRow();
 
 
+
+console.log('proof of life')
+
+var userForm = document.getElementById('user-form');
+userForm.addEventListener('submit', handleSubmit);
+
+function handleSubmit(event) {
+    event.preventDefault();
+    
+    var name = event.target.inputElementName.value;
+    var age = event.target.inputElementAge.value;
+
+    console.log('name: ', name);
+    console.log('age: ', age);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 // render: CookieShop.prototype.generateHourlyCookies();
 // for (var i = 0; i < hours.length; i++) {
 //     var liEl = document.createElement('li');
@@ -195,12 +223,3 @@ renderFooterRow();
 
 
 // SeattleShop.render();
-
-
-// var userForm = document.getElementById('user-form');
-// userForm.addEventListener('Submit', handleSubmit);
-
-// function handleSubmit(event) {
-//     console.log('proof of life!')
-// };
-
