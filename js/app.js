@@ -142,13 +142,19 @@ userForm.addEventListener('submit', handleSubmit);
 function handleSubmit(event) {
     event.preventDefault();
     
-    var name = event.target.inputElementName.value;
-    var age = event.target.inputElementAge.value;
+    var city = event.target.inputElementCity.value;
+    var minCust = event.target.inputElementMin.value;
+    var maxCust = event.target.inputElementMax.value
+    var avgCust = event.target.inputElementAvg.value
 
-    console.log('name: ', name);
-    console.log('age: ', age);
+    
+    new CookieShop(city, minCust, maxCust, avgCust);
+    
+    // event.target.inputElementName.value = null;
+    // event.target.inputElementAge.value = null;
+    
+    renderFooterRow();
 };
-
 
 
 
