@@ -133,6 +133,40 @@ new CookieShop('Lima', 2, 16, 4.6);
 renderFooterRow();
 
 
+
+console.log('proof of life')
+
+var userForm = document.getElementById('user-form');
+userForm.addEventListener('submit', handleSubmit);
+
+function handleSubmit(event) {
+    event.preventDefault();
+    
+    var city = event.target.inputElementCity.value;
+    var minCust = event.target.inputElementMin.value;
+    var maxCust = event.target.inputElementMax.value
+    var avgCust = event.target.inputElementAvg.value
+
+    
+    new CookieShop(city, minCust, maxCust, avgCust);
+    
+    // event.target.inputElementName.value = null;
+    // event.target.inputElementAge.value = null;
+    
+    renderFooterRow();
+};
+
+
+
+
+
+
+
+
+
+
+
+
 // render: CookieShop.prototype.generateHourlyCookies();
 // for (var i = 0; i < hours.length; i++) {
 //     var liEl = document.createElement('li');
